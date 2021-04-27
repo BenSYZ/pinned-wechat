@@ -1,7 +1,7 @@
 let currentTabId;
 let currentWinId;
-let telegramTabId;
-let telegramWinId;
+let wechatTabId;
+let wechatWinId;
 let previousTab;
 let previousWin;
 
@@ -20,34 +20,34 @@ function setButtonIcon(imageURL) {
 function createPinnedTab() {
     browser.tabs.create(
         {
-            url: "https://web.telegram.org",
+            url: "https://wx.qq.com",
             pinned: true,
             active: true
         }
     )
 };
 
-function handleSearch(telegramTabs) {
+function handleSearch(wechatTabs) {
     //console.log("currentTabId: " + currentTabId);
     //console.log("currentWinId: " + currentWinId);
-    if (telegramTabs.length > 0) {
-        //console.log("there is a telegram tab");
-        telegramTabId = telegramTabs[0].id;
-        telegramWinId = telegramTabs[0].windowId;
-        if (telegramTabId === currentTabId) {
-            //console.log("I'm in the telegram tab");
+    if (wechatTabs.length > 0) {
+        //console.log("there is a wechat tab");
+        wechatTabId = wechatTabs[0].id;
+        wechatWinId = wechatTabs[0].windowId;
+        if (wechatTabId === currentTabId) {
+            //console.log("I'm in the wechat tab");
             browser.windows.update(previousWin, { focused: true })
             browser.tabs.update(previousTab, { active: true, });
         } else {
-            //console.log("I'm NOT in the telegram tab");
+            //console.log("I'm NOT in the wechat tab");
             previousTab = currentTabId;
             previousWin = currentWinId;
-            browser.windows.update(telegramWinId, { focused: true, });
-            browser.tabs.update(telegramTabId, { active: true, });
+            browser.windows.update(wechatWinId, { focused: true, });
+            browser.tabs.update(wechatTabId, { active: true, });
         }
-        setButtonIcon(telegramTabs[0].favIconUrl);
+        setButtonIcon(wechatTabs[0].favIconUrl);
     } else {
-        //console.log("there is NO telegram tab");
+        //console.log("there is NO wechat tab");
         previousTab = currentTabId;
         createPinnedTab();
     }
@@ -57,7 +57,7 @@ function handleClick(tab) {
     //console.log("*********Button clicked*********");
     currentTabId = tab.id;
     currentWinId = tab.windowId;
-    var querying = browser.tabs.query({ url: "*://web.telegram.org/*" });
+    var querying = browser.tabs.query({ url: "*://wx.qq.com/*" });
     querying.then(handleSearch, onError);
 };
 
@@ -68,4 +68,4 @@ function update(details) {
 };
 
 browser.browserAction.onClicked.addListener(handleClick);
-browser.runtime.onInstalled.addListener(update);
+browser.runtime.onInstalled.addListener(update)

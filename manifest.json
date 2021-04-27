@@ -1,36 +1,37 @@
 {
+
+  "manifest_version": 2,
+  "name": "Pinned Wechat",
+  "description": "Go to the pinned Wechat tab. If it doesn't exist, it's created.",
+  "version": "0.1.2",
+  "author": "Ben",
   "applications": {
     "gecko": {
-      "id": "telegrampanel@alejandrobrizuela.com.ar"
+      "id": "pinned-wechat@bensongsyz.me"
     }
   },
 
-  "manifest_version": 2,
-  "name": "Pinned Telegram",
-  "version": "2.1.2",
-  "description": "Go to the pinned Telegram tab. If it doesn't exist, it's created.",
-
   "icons": {
-    "48": "icons/telegram-48.png",
-    "64": "icons/telegram-64.png"
+    "48": "icons/wechat-48.png",
+    "64": "icons/wechat-64.png"
   },
-  
+
   "permissions": [
     "tabs"
   ],
 
   "browser_action": {
     "default_icon": {
-      "32": "icons/telegram-32.png"
+      "32": "icons/wechat-32.png"
     },
-    "default_title": "Pinned Telegram",
+    "default_title": "Pinned Wechat",
     "default_area": "navbar"
   },
 
   "background": {
     "scripts": ["background.js"]
   },
-  
+
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
